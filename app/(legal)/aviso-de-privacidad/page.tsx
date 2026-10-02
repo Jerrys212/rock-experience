@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { privacy } from "@/content/privacy";
-import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-    title: `${privacy.title} | ${site.name}`,
+    title: privacy.title,
     description: privacy.description,
+    alternates: { canonical: "/aviso-de-privacidad" },
 };
 
 export default function PrivacyPage() {

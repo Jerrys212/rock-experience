@@ -5,6 +5,7 @@
     --color-accent-hover: #7046ff;
     --color-accent-light: #9d85ff;
     --color-surface: #111113;
+    --color-danger: #f87171;
     --color-scrollbar: oklch(1 0 0 / 0.18);
     --color-scrollbar-hover: oklch(1 0 0 / 0.32);
 

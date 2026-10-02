@@ -2,6 +2,18 @@
 
 Landing page de la campaña ficticia **ROCK EXPERIENCE**. En ella el usuario conoce la campaña, consulta las experiencias disponibles (cargadas dinámicamente), ve el detalle de cada una y envía sus datos en un formulario de contacto que manda correos reales.
 
+## Parte 2 de la prueba técnica: lectura obligatoria
+
+> [!IMPORTANT]
+> La prueba técnica tiene **dos partes** y este README solo documenta la primera (la landing). La **Parte 2** está en [`parte2.md`](./parte2.md) y es igual de importante para la evaluación: **por favor léela.**
+
+En [`parte2.md`](./parte2.md) se encuentra el ejercicio de **debugging del componente `ContactForm`**:
+
+- El código original que había que revisar.
+- Los problemas encontrados, agrupados en accesibilidad, HTML semántico, React, validaciones, APIs, manejo de errores, seguridad, UX, performance y buenas prácticas.
+- La explicación de por qué cada uno es un problema y cómo se corrige.
+- Una versión corregida y completa del componente.
+
 ## Cómo ejecutar el proyecto
 
 Requisitos: Node.js 20+ y [pnpm](https://pnpm.io/) 11.

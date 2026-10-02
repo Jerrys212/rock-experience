@@ -109,7 +109,8 @@ my-landing/
 ### Server vs Client Components
 
 - **Default to Server Components.** Sections are server components.
-- `"use client"` only for state, effects, browser APIs or event handlers (accordion, billing toggle, mobile menu, form). Isolate it in the **smallest leaf component** inside the section, never the whole section.
+- **`"use client"` only when there is no server/HTML/CSS alternative.** Before adding it, prefer native platform features: `<details>`/`<summary>`, `<dialog>`, the Popover API (`popover` + `popovertarget`, e.g. the mobile menu), CSS `:has()`, `@starting-style`, `aria-*`/`data-*` variants.
+- When it's unavoidable (e.g. scrolling without changing the URL, IntersectionObserver, a form), keep it in a **tiny, reusable leaf** (e.g. `ScrollButton`, a renderless observer) that server components compose. Never mark a section, layout component or whole navbar as client.
 - **Mutations go through Server Actions**, never client-side fetch.
 
 ### Imports
@@ -146,6 +147,7 @@ my-landing/
 
 - No component library: primitives are built in-house, so a11y is our responsibility.
 - Every interactive element is keyboard-navigable, has a visible focus state and an accessible label.
+- **Every clickable element shows `cursor: pointer`** (disabled ones `not-allowed`). Tailwind v4 removed it from buttons, so it's set globally in `app/globals.css` (`@layer base`); custom clickable elements outside those selectors need `cursor-pointer`. Non-interactive elements (e.g. cards that aren't links) must not use it.
 - Prefer native elements before custom ones: `<button>` for actions, `<a>` for navigation, `<details>`/`<summary>` for the FAQ accordion, `<dialog>` for modals.
 - Custom interactive widgets must expose the right ARIA state (`aria-expanded`, `aria-pressed`, `aria-controls`); e.g. the mobile menu toggle and the billing toggle.
 - `<main>` is rendered once, in `app/layout.tsx`. Sections must not render their own `<main>`.

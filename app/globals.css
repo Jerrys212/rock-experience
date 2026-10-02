@@ -1,26 +1,44 @@
 @import "tailwindcss";
 
 @theme {
-  --color-accent: #5b2eff;
-  --color-accent-hover: #7046ff;
+    --color-accent: #5b2eff;
+    --color-accent-hover: #7046ff;
 
-  /* Hero title: ~44px at 360px viewport → ~110px at 1440px */
-  --text-hero: clamp(2.75rem, 1.375rem + 6.111vw, 6.875rem);
-  --text-hero--line-height: 1.1;
-
-  --animate-fade-in: fade-in 200ms ease-out;
-
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+    /* Hero title: ~44px at 360px viewport → ~110px at 1440px */
+    --text-hero: clamp(2.75rem, 1.375rem + 6.111vw, 6.875rem);
+    --text-hero--line-height: 1.1;
 }
 
 @theme inline {
-  --font-sans: var(--font-jost);
-  --font-display: var(--font-kaushan-script);
+    --font-sans: var(--font-jost);
+    --font-display: var(--font-kaushan-script);
+}
+
+/*
+  Tailwind v4 resets buttons to `cursor: default`. Every clickable element must show
+  a pointer so users know they can act on it.
+*/
+@layer base {
+    button:not(:disabled),
+    [role="button"]:not([aria-disabled="true"]),
+    summary,
+    label[for],
+    select:not(:disabled),
+    input[type="checkbox"]:not(:disabled),
+    input[type="radio"]:not(:disabled),
+    input[type="submit"]:not(:disabled) {
+        cursor: pointer;
+    }
+
+    :disabled,
+    [aria-disabled="true"] {
+        cursor: not-allowed;
+    }
+}
+
+/* Lock page scroll while the mobile menu popover is open (it only exists below lg). */
+@media (width < 64rem) {
+    body:has(#mobile-menu:popover-open) {
+        overflow: hidden;
+    }
 }

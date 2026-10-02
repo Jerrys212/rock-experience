@@ -15,7 +15,7 @@ export default function PrivacyPage() {
             <p className="mt-6 text-base leading-relaxed text-white/70">{privacy.body}</p>
             <Link
                 href="/"
-                className="mt-10 inline-block rounded-sm text-sm text-white/70 underline underline-offset-4 transition-colors duration-150 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                className="mt-7 inline-flex min-h-11 items-center rounded-sm text-sm text-white/70 underline underline-offset-4 transition-colors duration-150 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             >
                 {privacy.backLabel}
             </Link>

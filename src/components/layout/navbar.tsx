@@ -2,6 +2,7 @@ import { ScrollButton } from "@/components/ui/scroll-button";
 import { navigation } from "@/content/navigation";
 import { cn } from "@/lib/utils";
 import { ActiveSectionObserver } from "./active-section-observer";
+import { CloseMenuOnDesktop } from "./close-menu-on-desktop";
 
 const MOBILE_MENU_ID = "mobile-menu";
 const SECTION_IDS = navigation.items.map((item) => item.id);
@@ -18,7 +19,7 @@ function BarRow({ inMenu = false }: { inMenu?: boolean }) {
                 target={navigation.logo.target}
                 aria-label={navigation.logo.ariaLabel}
                 className={cn(
-                    "rounded-sm text-lg font-semibold tracking-wide whitespace-nowrap text-white uppercase md:text-2xl md:tracking-wider",
+                    "inline-flex h-11 shrink-0 items-center rounded-sm text-sm font-semibold whitespace-nowrap text-white uppercase min-[360px]:text-base sm:text-lg sm:tracking-wide md:text-2xl md:tracking-wider",
                     focusRing,
                 )}
                 {...menuProps}
@@ -48,11 +49,11 @@ function BarRow({ inMenu = false }: { inMenu?: boolean }) {
                 </nav>
             )}
 
-            <div className="ml-auto flex items-center gap-3 lg:ml-10">
+            <div className="ml-auto flex items-center gap-2 pl-3 sm:gap-3 lg:ml-10 lg:pl-0">
                 <ScrollButton
                     target={navigation.cta.target}
                     className={cn(
-                        "bg-accent rounded-full px-4 py-2 text-xs font-semibold tracking-[0.05em] text-white uppercase md:px-5 md:py-2.5 md:text-sm",
+                        "bg-accent relative rounded-full px-3 py-2 text-xs font-semibold tracking-[0.05em] whitespace-nowrap text-white uppercase after:absolute after:inset-x-0 after:-inset-y-1.5 sm:px-4 md:px-5 md:py-2.5 md:text-sm",
                         "hover:bg-accent-hover transition duration-200 hover:-translate-y-px motion-reduce:transition-none motion-reduce:hover:translate-y-0",
                         focusRing,
                     )}
@@ -65,7 +66,7 @@ function BarRow({ inMenu = false }: { inMenu?: boolean }) {
                     <button
                         type="button"
                         aria-label={navigation.menu.closeLabel}
-                        className={cn("relative -mr-2 size-10 rounded-sm lg:hidden", focusRing)}
+                        className={cn("relative -mr-2 size-11 shrink-0 rounded-sm lg:hidden", focusRing)}
                         {...closesMenu}
                     >
                         <span aria-hidden="true" className="absolute inset-x-2 top-1/2 h-0.5 rotate-45 bg-white" />
@@ -78,7 +79,7 @@ function BarRow({ inMenu = false }: { inMenu?: boolean }) {
                         aria-controls={MOBILE_MENU_ID}
                         aria-label={navigation.menu.openLabel}
                         className={cn(
-                            "-mr-2 flex size-10 flex-col items-center justify-center gap-1.5 rounded-sm lg:hidden",
+                            "-mr-2 flex size-11 shrink-0 flex-col items-center justify-center gap-1.5 rounded-sm lg:hidden",
                             focusRing,
                         )}
                     >
@@ -110,14 +111,14 @@ export function Navbar() {
             >
                 <BarRow inMenu />
                 <nav aria-label={navigation.menu.mobileNavLabel} className="flex flex-1 items-center justify-center">
-                    <ul className="flex flex-col items-center gap-8 pb-16 md:pb-20">
+                    <ul className="flex flex-col items-center gap-4 pb-16 md:pb-20">
                         {navigation.items.map((item) => (
                             <li key={item.id}>
                                 <ScrollButton
                                     target={item.id}
                                     data-nav-item={item.id}
                                     className={cn(
-                                        "rounded-sm text-2xl font-medium tracking-[0.05em] text-white/85 uppercase transition-colors hover:text-white aria-[current=true]:text-white",
+                                        "block rounded-sm px-4 py-2 text-2xl font-medium tracking-[0.05em] text-white/85 uppercase transition-colors hover:text-white aria-[current=true]:text-white",
                                         focusRing,
                                     )}
                                     {...closesMenu}
@@ -131,6 +132,7 @@ export function Navbar() {
             </div>
 
             <ActiveSectionObserver sectionIds={SECTION_IDS} />
+            <CloseMenuOnDesktop menuId={MOBILE_MENU_ID} />
         </header>
     );
 }

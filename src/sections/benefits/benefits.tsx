@@ -23,12 +23,12 @@ export function Benefits() {
                         </h2>
                         <span aria-hidden="true" className="h-px flex-1 bg-white/15" />
                     </div>
-                    <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
+                    <p className="mt-4 max-w-lg text-base leading-relaxed text-white/70 md:max-w-xl md:text-lg">
                         {benefitsSection.subtitle}
                     </p>
                 </header>
 
-                <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+                <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8 xl:grid-cols-4">
                     {benefits.map((benefit) => (
                         <li key={benefit.id}>
                             <BenefitCard benefit={benefit} />

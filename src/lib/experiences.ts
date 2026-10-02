@@ -1,10 +1,23 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { ExperiencesSchema, type Experience } from "@/content/experiences";
+import {
+    ExperienceDetailListSchema,
+    ExperiencesSchema,
+    type Experience,
+    type ExperienceDetail,
+} from "@/content/experiences";
 
 const DATA_PATH = path.join(process.cwd(), "src/content/experiences.json");
 
+async function readExperiencesFile(): Promise<unknown> {
+    return JSON.parse(await readFile(DATA_PATH, "utf8"));
+}
+
 export async function getExperiences(): Promise<Experience[]> {
-    const raw: unknown = JSON.parse(await readFile(DATA_PATH, "utf8"));
-    return ExperiencesSchema.parse(raw);
+    return ExperiencesSchema.parse(await readExperiencesFile());
+}
+
+export async function getExperience(id: number): Promise<ExperienceDetail | undefined> {
+    const experiences = ExperienceDetailListSchema.parse(await readExperiencesFile());
+    return experiences.find((experience) => experience.id === id);
 }

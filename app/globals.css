@@ -32,6 +32,10 @@
     }
 }
 
+body:has(dialog:modal) {
+    overflow: hidden;
+}
+
 @media (width < 64rem) {
     body:has(#mobile-menu:popover-open) {
         overflow: hidden;

@@ -5,6 +5,7 @@ import { ActiveSectionObserver } from "./active-section-observer";
 import { CloseMenuOnDesktop } from "./close-menu-on-desktop";
 
 const MOBILE_MENU_ID = "mobile-menu";
+const MENU_ITEM_STAGGER_MS = 40;
 const SECTION_IDS = navigation.items.map((item) => item.id);
 
 const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
@@ -34,7 +35,7 @@ function BarRow({ inMenu = false }: { inMenu?: boolean }) {
                                     data-nav-item={item.id}
                                     className={cn(
                                         "relative rounded-sm text-sm font-medium tracking-[0.05em] text-white/85 uppercase transition-colors duration-200 hover:text-white aria-[current=true]:text-white",
-                                        "after:absolute after:inset-x-0 after:-bottom-2 after:h-0.5 after:bg-white after:opacity-0 after:transition-opacity after:duration-200 aria-[current=true]:after:opacity-100",
+                                        "after:absolute after:inset-x-0 after:-bottom-2 after:h-0.5 after:scale-x-0 after:bg-white after:transition-[scale] after:duration-300 after:ease-out-soft hover:after:scale-x-100 aria-[current=true]:after:scale-x-100 motion-reduce:after:transition-none",
                                         focusRing,
                                     )}
                                 >
@@ -51,7 +52,7 @@ function BarRow({ inMenu = false }: { inMenu?: boolean }) {
                     target={navigation.cta.target}
                     className={cn(
                         "bg-accent relative rounded-full px-3 py-2 text-xs font-semibold tracking-[0.05em] whitespace-nowrap text-white uppercase after:absolute after:inset-x-0 after:-inset-y-1.5 sm:px-4 md:px-5 md:py-2.5 md:text-sm",
-                        "hover:bg-accent-hover transition duration-200 hover:-translate-y-px motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+                        "hover:bg-accent-hover transition duration-200 hover:-translate-y-px active:scale-[0.97] motion-reduce:transition-none motion-reduce:hover:translate-y-0",
                         focusRing,
                     )}
                     >
@@ -108,8 +109,12 @@ export function Navbar() {
                 <BarRow inMenu />
                 <nav aria-label={navigation.menu.mobileNavLabel} className="flex flex-1 items-center justify-center">
                     <ul className="flex flex-col items-center gap-4 pb-16 md:pb-20">
-                        {navigation.items.map((item) => (
-                            <li key={item.id}>
+                        {navigation.items.map((item, index) => (
+                            <li
+                                key={item.id}
+                                style={{ transitionDelay: `${index * MENU_ITEM_STAGGER_MS}ms` }}
+                                className="transition duration-300 ease-out-soft motion-reduce:transition-none starting:translate-y-2 starting:opacity-0"
+                            >
                                 <ScrollLink
                                     target={item.id}
                                     data-nav-item={item.id}

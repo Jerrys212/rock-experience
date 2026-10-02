@@ -17,20 +17,20 @@ export function Benefits() {
                     <div className="flex items-center gap-6">
                         <h2
                             id={TITLE_ID}
-                            className="text-3xl font-bold tracking-wide text-white uppercase md:text-4xl"
+                            className="reveal text-3xl font-bold tracking-wide text-white uppercase md:text-4xl"
                         >
                             {benefitsSection.title}
                         </h2>
-                        <span aria-hidden="true" className="h-px flex-1 bg-white/15" />
+                        <span aria-hidden="true" className="reveal-line h-px flex-1 bg-white/15" />
                     </div>
-                    <p className="mt-4 max-w-lg text-base leading-relaxed text-white/70 md:max-w-xl md:text-lg">
+                    <p className="reveal mt-4 max-w-lg text-base leading-relaxed text-white/70 md:max-w-xl md:text-lg">
                         {benefitsSection.subtitle}
                     </p>
                 </header>
 
                 <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8 xl:grid-cols-4">
                     {benefits.map((benefit) => (
-                        <li key={benefit.id}>
+                        <li key={benefit.id} className="reveal">
                             <BenefitCard benefit={benefit} />
                         </li>
                     ))}

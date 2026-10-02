@@ -11,6 +11,44 @@
 
     --text-hero: clamp(2.75rem, 1.375rem + 6.111vw, 6.875rem);
     --text-hero--line-height: 1.1;
+
+    --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+}
+
+@keyframes draw-line {
+    from {
+        transform: scaleX(0);
+    }
+}
+
+/* Scroll-driven: no JS, and browsers without support simply show the content. */
+@utility reveal {
+    @media (prefers-reduced-motion: no-preference) {
+        @supports (animation-timeline: view()) {
+            animation: reveal var(--ease-out-soft) both;
+            animation-timeline: view();
+            animation-range: entry 0% entry 8rem;
+        }
+    }
+}
+
+@utility reveal-line {
+    transform-origin: left;
+
+    @media (prefers-reduced-motion: no-preference) {
+        @supports (animation-timeline: view()) {
+            animation: draw-line linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 30%;
+        }
+    }
 }
 
 @theme inline {

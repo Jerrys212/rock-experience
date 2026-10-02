@@ -23,11 +23,11 @@ export function Experiences({ searchParams }: ExperiencesProps) {
                 <div className="mb-12 flex items-center gap-6 md:mb-16">
                     <h2
                         id={TITLE_ID}
-                        className="text-3xl font-bold tracking-wide text-white uppercase md:text-4xl"
+                        className="reveal text-3xl font-bold tracking-wide text-white uppercase md:text-4xl"
                     >
                         {experiencesSection.title}
                     </h2>
-                    <span aria-hidden="true" className="h-px flex-1 bg-white/15" />
+                    <span aria-hidden="true" className="reveal-line h-px flex-1 bg-white/15" />
                 </div>
 
                 <Suspense fallback={<ExperiencesSkeleton />}>

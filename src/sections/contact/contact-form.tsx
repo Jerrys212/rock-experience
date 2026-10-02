@@ -31,6 +31,7 @@ const DEFAULT_VALUES: ContactFormValues = {
 const controlBase =
     "bg-surface w-full scroll-mt-28 rounded-sm border px-4 text-base text-white transition duration-150 placeholder:text-white/50 focus:ring-2 focus:outline-none motion-reduce:transition-none";
 const controlValid = "focus:border-accent-light focus:ring-accent/40 border-white/40";
+const errorAppear = "transition duration-200 motion-reduce:transition-none starting:-translate-y-1 starting:opacity-0";
 const controlInvalid = "border-danger focus:border-danger focus:ring-danger/40";
 
 type TextFieldName = keyof typeof contact.form.fields;
@@ -79,7 +80,7 @@ function TextField({ name, registration, error, className, ...props }: TextField
                 />
             )}
             {error && (
-                <p id={errorId} className="text-danger mt-1.5 text-sm">
+                <p id={errorId} className={cn("text-danger mt-1.5 text-sm", errorAppear)}>
                     {error}
                 </p>
             )}
@@ -114,9 +115,12 @@ function SuccessPanel({ minHeight, onReset }: SuccessPanelProps) {
             role="status"
             tabIndex={-1}
             style={{ minHeight }}
-            className="bg-surface border-accent/40 flex scroll-mt-28 flex-col items-center justify-center rounded-sm border p-10 text-center focus:outline-none"
+            className="bg-surface border-accent/40 flex scroll-mt-28 flex-col items-center justify-center rounded-sm border p-10 text-center transition duration-500 ease-out-soft focus:outline-none motion-reduce:transition-none starting:translate-y-2 starting:opacity-0"
         >
-            <span aria-hidden="true" className="bg-accent flex size-14 items-center justify-center rounded-full">
+            <span
+                aria-hidden="true"
+                className="bg-accent flex size-14 items-center justify-center rounded-full transition delay-150 duration-500 ease-out-soft motion-reduce:transition-none starting:scale-50 starting:opacity-0"
+            >
                 <CheckCircle size={28} strokeWidth={2} className="text-white" />
             </span>
             <p className="mt-6 text-xl font-semibold text-white">{contact.success.message}</p>
@@ -279,7 +283,7 @@ export function ContactForm() {
                     </label>
                 </div>
                 {privacyError && (
-                    <p id={privacyErrorId} className="text-danger mt-1.5 text-sm">
+                    <p id={privacyErrorId} className={cn("text-danger mt-1.5 text-sm", errorAppear)}>
                         {privacyError}
                     </p>
                 )}
@@ -287,14 +291,14 @@ export function ContactForm() {
 
             <div className="md:col-span-2">
                 {generalError && (
-                    <p role="alert" className="text-danger mb-5 text-sm">
+                    <p role="alert" className={cn("text-danger mb-5 text-sm", errorAppear)}>
                         {form.generalError}
                     </p>
                 )}
                 <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-accent hover:enabled:bg-accent-hover inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-[0.05em] text-white uppercase transition duration-200 hover:enabled:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white disabled:opacity-70 motion-reduce:transition-none motion-reduce:hover:enabled:translate-y-0 sm:w-auto"
+                    className="bg-accent hover:enabled:bg-accent-hover inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-[0.05em] text-white uppercase transition duration-200 hover:enabled:-translate-y-px active:enabled:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white disabled:opacity-70 motion-reduce:transition-none motion-reduce:hover:enabled:translate-y-0 sm:w-auto"
                 >
                     {isSubmitting && <Spinner />}
                     {isSubmitting ? form.submit.loadingLabel : form.submit.label}

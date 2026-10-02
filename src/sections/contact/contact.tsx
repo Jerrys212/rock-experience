@@ -17,18 +17,18 @@ export function Contact() {
                 <div className="mb-12 flex items-center gap-6 md:mb-16">
                     <h2
                         id={TITLE_ID}
-                        className="text-3xl font-bold tracking-wide text-white uppercase md:text-4xl"
+                        className="reveal text-3xl font-bold tracking-wide text-white uppercase md:text-4xl"
                     >
                         {contact.title}
                     </h2>
-                    <span aria-hidden="true" className="h-px flex-1 bg-white/15" />
+                    <span aria-hidden="true" className="reveal-line h-px flex-1 bg-white/15" />
                 </div>
 
                 <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
-                    <div className="lg:col-span-7">
+                    <div className="reveal lg:col-span-7">
                         <ContactForm />
                     </div>
-                    <div className="lg:col-span-5">
+                    <div className="reveal lg:col-span-5">
                         <ContactInfo />
                     </div>
                 </div>

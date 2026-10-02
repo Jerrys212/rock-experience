@@ -17,8 +17,22 @@ const kaushanScript = Kaushan_Script({
 });
 
 export const metadata: Metadata = {
-    title: site.name,
+    metadataBase: new URL(site.url),
+    title: { default: `${site.name} | ${site.tagline}`, template: `%s | ${site.name}` },
     description: site.description,
+    openGraph: {
+        type: "website",
+        siteName: site.name,
+        title: `${site.name} | ${site.tagline}`,
+        description: site.description,
+        url: "/",
+        locale: site.ogLocale,
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: `${site.name} | ${site.tagline}`,
+        description: site.description,
+    },
 };
 
 export default function RootLayout({ children, modal }: LayoutProps<"/">) {

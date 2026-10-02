@@ -110,7 +110,7 @@ my-landing/
 
 - **Default to Server Components.** Sections are server components.
 - **`"use client"` only when there is no server/HTML/CSS alternative.** Before adding it, prefer native platform features: `<details>`/`<summary>`, `<dialog>`, the Popover API (`popover` + `popovertarget`, e.g. the mobile menu), CSS `:has()`, `@starting-style`, `aria-*`/`data-*` variants.
-- When it's unavoidable (e.g. scrolling without changing the URL, IntersectionObserver, a form), keep it in a **tiny, reusable leaf** (e.g. `ScrollButton`, a renderless observer) that server components compose. Never mark a section, layout component or whole navbar as client.
+- When it's unavoidable (e.g. scrolling without changing the URL, IntersectionObserver, a form), keep it in a **tiny, reusable leaf** (e.g. `ScrollLink`, a renderless observer) that server components compose. Never mark a section, layout component or whole navbar as client.
 - **Mutations go through Server Actions**, never client-side fetch.
 
 ### Styling & Colors

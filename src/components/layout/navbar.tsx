@@ -1,4 +1,4 @@
-import { ScrollButton } from "@/components/ui/scroll-button";
+import { ScrollLink } from "@/components/ui/scroll-link";
 import { navigation } from "@/content/navigation";
 import { cn } from "@/lib/utils";
 import { ActiveSectionObserver } from "./active-section-observer";
@@ -11,28 +11,25 @@ const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-4 focus-
 const closesMenu = { popoverTarget: MOBILE_MENU_ID, popoverTargetAction: "hide" } as const;
 
 function BarRow({ inMenu = false }: { inMenu?: boolean }) {
-    const menuProps = inMenu ? closesMenu : {};
-
     return (
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center px-4 md:h-20 md:px-8">
-            <ScrollButton
+            <ScrollLink
                 target={navigation.logo.target}
                 aria-label={navigation.logo.ariaLabel}
                 className={cn(
                     "inline-flex h-11 shrink-0 items-center rounded-sm text-sm font-semibold whitespace-nowrap text-white uppercase min-[360px]:text-base sm:text-lg sm:tracking-wide md:text-2xl md:tracking-wider",
                     focusRing,
                 )}
-                {...menuProps}
             >
                 {navigation.logo.label}
-            </ScrollButton>
+            </ScrollLink>
 
             {!inMenu && (
                 <nav aria-label={navigation.menu.navLabel} className="ml-auto hidden lg:block">
                     <ul className="flex items-center gap-10">
                         {navigation.items.map((item) => (
                             <li key={item.id}>
-                                <ScrollButton
+                                <ScrollLink
                                     target={item.id}
                                     data-nav-item={item.id}
                                     className={cn(
@@ -42,7 +39,7 @@ function BarRow({ inMenu = false }: { inMenu?: boolean }) {
                                     )}
                                 >
                                     {item.label}
-                                </ScrollButton>
+                                </ScrollLink>
                             </li>
                         ))}
                     </ul>
@@ -50,17 +47,16 @@ function BarRow({ inMenu = false }: { inMenu?: boolean }) {
             )}
 
             <div className="ml-auto flex items-center gap-2 pl-3 sm:gap-3 lg:ml-10 lg:pl-0">
-                <ScrollButton
+                <ScrollLink
                     target={navigation.cta.target}
                     className={cn(
                         "bg-accent relative rounded-full px-3 py-2 text-xs font-semibold tracking-[0.05em] whitespace-nowrap text-white uppercase after:absolute after:inset-x-0 after:-inset-y-1.5 sm:px-4 md:px-5 md:py-2.5 md:text-sm",
                         "hover:bg-accent-hover transition duration-200 hover:-translate-y-px motion-reduce:transition-none motion-reduce:hover:translate-y-0",
                         focusRing,
                     )}
-                    {...menuProps}
-                >
+                    >
                     {navigation.cta.label}
-                </ScrollButton>
+                </ScrollLink>
 
                 {inMenu ? (
                     <button
@@ -114,17 +110,16 @@ export function Navbar() {
                     <ul className="flex flex-col items-center gap-4 pb-16 md:pb-20">
                         {navigation.items.map((item) => (
                             <li key={item.id}>
-                                <ScrollButton
+                                <ScrollLink
                                     target={item.id}
                                     data-nav-item={item.id}
                                     className={cn(
                                         "block rounded-sm px-4 py-2 text-2xl font-medium tracking-[0.05em] text-white/85 uppercase transition-colors hover:text-white aria-[current=true]:text-white",
                                         focusRing,
                                     )}
-                                    {...closesMenu}
                                 >
                                     {item.label}
-                                </ScrollButton>
+                                </ScrollLink>
                             </li>
                         ))}
                     </ul>

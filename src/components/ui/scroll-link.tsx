@@ -1,9 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { ComponentProps, MouseEvent } from "react";
 
-type ScrollButtonProps = Omit<ComponentProps<"button">, "type" | "onClick"> & {
+type ScrollLinkProps = Omit<ComponentProps<typeof Link>, "href" | "onClick"> & {
     target: string;
 };
 
@@ -26,11 +27,20 @@ function scrollWhenSectionIsReachable(target: string) {
     requestAnimationFrame(waitForSection);
 }
 
-export function ScrollButton({ target, ...props }: ScrollButtonProps) {
+const isModifiedClick = (event: MouseEvent) =>
+    event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+
+export function ScrollLink({ target, ...props }: ScrollLinkProps) {
     const router = useRouter();
 
-    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-        const insideModal = event.currentTarget.closest("dialog") !== null;
+    const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+        if (isModifiedClick(event)) return;
+        event.preventDefault();
+
+        const link = event.currentTarget;
+        link.closest<HTMLElement>("[popover]")?.hidePopover();
+
+        const insideModal = link.closest("dialog") !== null;
         const section = document.getElementById(target);
         if (section && !insideModal) {
             scrollToSection(section);
@@ -42,5 +52,5 @@ export function ScrollButton({ target, ...props }: ScrollButtonProps) {
         scrollWhenSectionIsReachable(target);
     };
 
-    return <button type="button" onClick={handleClick} {...props} />;
+    return <Link href={`/#${target}`} scroll={false} onClick={handleClick} {...props} />;
 }

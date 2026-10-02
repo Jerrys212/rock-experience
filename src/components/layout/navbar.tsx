@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { ScrollLink } from "@/components/ui/scroll-link";
 import { navigation } from "@/content/navigation";
 import { cn, focusRing } from "@/lib/utils";
@@ -129,7 +130,9 @@ export function Navbar() {
                 </nav>
             </div>
 
-            <ActiveSectionObserver sectionIds={SECTION_IDS} />
+            <Suspense>
+                <ActiveSectionObserver sectionIds={SECTION_IDS} />
+            </Suspense>
             <CloseMenuOnDesktop menuId={MOBILE_MENU_ID} />
         </header>
     );

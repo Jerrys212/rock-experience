@@ -29,7 +29,11 @@ export const ContactSchema = z.object({
         .min(2, { error: nameError })
         .max(80, { error: "Tu nombre no puede superar los 80 caracteres." })
         .refine((value) => !/\d/.test(value), { error: "Tu nombre no puede contener números." }),
-    email: z.string({ error: emailError }).trim().toLowerCase().pipe(z.email({ error: emailError })),
+    email: z
+        .string({ error: emailError })
+        .trim()
+        .toLowerCase()
+        .pipe(z.email({ error: emailError })),
     phone: z
         .string({ error: phoneLengthError })
         .trim()

@@ -1,0 +1,11 @@
+.next/
+node_modules/
+pnpm-lock.yaml
+next-env.d.ts
+public/
+test-results/
+playwright-report/
+blob-report/
+coverage/
+AGENTS.md
+instructions.md

@@ -7,7 +7,7 @@ const data: ContactInput = {
     email: "ana@empresa.com",
     phone: "55 1234 5678",
     company: "",
-    message: "Hola\nQueremos \"algo\" & más",
+    message: 'Hola\nQueremos "algo" & más',
     privacy: true,
     website: "",
 };

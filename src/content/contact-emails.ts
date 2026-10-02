@@ -2,7 +2,7 @@ export const contactEmails = {
     brand: "Rock Experience",
     owner: {
         subject: (name: string) => `Nuevo mensaje de ${name} desde el formulario`,
-        heading: "Nuevo mensaje desde \"Quiero participar\"",
+        heading: 'Nuevo mensaje desde "Quiero participar"',
         intro: "Alguien llenó el formulario de contacto de la landing. Puedes responder directamente a este correo.",
         labels: {
             name: "Nombre",

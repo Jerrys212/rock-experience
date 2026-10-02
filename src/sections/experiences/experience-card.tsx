@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Experience } from "@/content/experiences";
 
 type ExperienceCardProps = {
@@ -7,7 +8,7 @@ type ExperienceCardProps = {
 
 export function ExperienceCard({ experience }: ExperienceCardProps) {
     return (
-        <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-white/8 bg-surface transition-colors duration-500 hover:border-white/15 motion-reduce:transition-none">
+        <article className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-white/8 bg-surface transition-colors duration-500 hover:border-white/15 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-4 has-[a:focus-visible]:outline-white motion-reduce:transition-none">
             <div className="relative aspect-3/2">
                 <div className="absolute inset-0 overflow-hidden">
                     <Image
@@ -29,7 +30,15 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
             </div>
 
             <div className="flex flex-1 flex-col px-8 pt-10.5 pb-8 text-center">
-                <h3 className="text-xl font-semibold tracking-wide text-white">{experience.title}</h3>
+                <h3 className="text-xl font-semibold tracking-wide text-white">
+                    <Link
+                        href={`/experiencias/${experience.id}`}
+                        scroll={false}
+                        className="after:absolute after:inset-0 focus-visible:outline-none"
+                    >
+                        {experience.title}
+                    </Link>
+                </h3>
                 <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-white/70 md:text-base">
                     {experience.description}
                 </p>

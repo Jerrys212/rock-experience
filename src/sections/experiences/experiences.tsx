@@ -1,13 +1,14 @@
 import { Suspense } from "react";
 import { experiencesSection } from "@/content/experiences";
 import { sectionIds } from "@/content/navigation";
-import { ExperiencesGrid, type ExperiencesSearchParams } from "./experiences-grid";
+import { ExperiencesGrid } from "./experiences-grid";
 import { ExperiencesSkeleton } from "./experiences-skeleton";
+import type { SearchParams } from "./simulation";
 
 const TITLE_ID = "experiences-title";
 
 type ExperiencesProps = {
-    searchParams: ExperiencesSearchParams;
+    searchParams: SearchParams;
 };
 
 export function Experiences({ searchParams }: ExperiencesProps) {

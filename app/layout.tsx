@@ -21,12 +21,13 @@ export const metadata: Metadata = {
     description: site.description,
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children, modal }: LayoutProps<"/">) {
     return (
         <html lang={site.locale} className={`${jost.variable} ${kaushanScript.variable} h-full antialiased`}>
             <body className="flex min-h-full flex-col bg-black font-sans text-white">
                 <Navbar />
                 <main className="flex-1">{children}</main>
+                {modal}
             </body>
         </html>
     );

@@ -76,7 +76,7 @@ export function ExperienceDetail({ experience, headingLevel: Heading }: Experien
                 <div className="mt-10 flex justify-center">
                     <ScrollLink
                         target={experienceDetailCopy.cta.target}
-                        className="bg-accent hover:bg-accent-hover inline-flex h-12 w-full items-center justify-center rounded-full px-8 text-sm font-semibold tracking-[0.05em] text-white uppercase transition duration-200 hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto"
+                        className="bg-accent hover:bg-accent-hover inline-flex h-12 w-full items-center justify-center rounded-full px-8 text-sm font-semibold tracking-[0.05em] text-white uppercase transition duration-200 hover:-translate-y-px active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto"
                     >
                         {experienceDetailCopy.cta.label}
                     </ScrollLink>

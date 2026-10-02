@@ -42,7 +42,7 @@ export function Footer() {
                     <ScrollLink
                         target={navigation.cta.target}
                         className={cn(
-                            "bg-accent hover:bg-accent-hover inline-flex h-11 items-center rounded-full px-6 text-sm font-semibold tracking-[0.05em] whitespace-nowrap text-white uppercase transition duration-200 hover:-translate-y-px motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+                            "bg-accent hover:bg-accent-hover inline-flex h-11 items-center rounded-full px-6 text-sm font-semibold tracking-[0.05em] whitespace-nowrap text-white uppercase transition duration-200 hover:-translate-y-px active:scale-[0.97] motion-reduce:transition-none motion-reduce:hover:translate-y-0",
                             focusRing,
                         )}
                     >

@@ -155,6 +155,27 @@ La interfaz se reorganiza por dispositivo en lugar de solo escalar. Se auditó e
   - Las cards usan `lazy` y un `sizes` calculado según el ancho real de cada columna en cada breakpoint (por ejemplo, 384 px en 1440), para no descargar imágenes de más.
 - **Fuentes con `next/font`:** se autoalojan, sin peticiones a Google Fonts ni saltos de layout.
 
+### Animaciones
+
+El movimiento es sutil y cada animación cumple una función; no se anima por animar.
+
+| Dónde | Qué hace | Para qué |
+| --- | --- | --- |
+| Títulos de sección, cards y columnas de contacto | Aparecen con un leve desplazamiento hacia arriba al entrar en pantalla | Marcar el inicio de cada bloque y guiar la lectura mientras se hace scroll |
+| Línea junto a cada título | Se dibuja de izquierda a derecha | Reforzar la jerarquía del encabezado |
+| Navbar | El subrayado crece desde el centro en hover y en la sección activa | Indicar dónde está el usuario y qué es clicable |
+| Menú móvil | Los ítems aparecen escalonados (40 ms entre cada uno) | Llevar la vista de arriba hacia abajo al abrirlo |
+| Modal de experiencia | Entra con opacidad y un desplazamiento de 12 px | Conectar el detalle con la card que lo abrió |
+| Formulario | Los errores aparecen suavemente; la confirmación entra con el ícono | Que los cambios de estado se noten sin ser bruscos |
+| CTAs y botón de enviar | Se comprimen levemente al presionarlos | Confirmar el toque, sobre todo en móvil |
+
+Decisiones:
+
+- **Solo `transform` y `opacity`.** El navegador las anima en la GPU, sin recalcular el layout, así que no hay CLS ni bloqueo del hilo principal.
+- **Sin JavaScript ni librerías.** Las apariciones al hacer scroll usan *scroll-driven animations* (`animation-timeline: view()`). Las entradas usan `@starting-style`. En los navegadores sin soporte el contenido se muestra estático.
+- **El hero no tiene animación de entrada.** Se midió con un A/B de Lighthouse alternando corridas contra `main`. Animar la imagen y el texto del hero bajaba la puntuación móvil unos 4 puntos y retrasaba el LCP unos 0.6 s, porque el hero es lo primero que se pinta. Sin esas animaciones, la rama mide igual que `main`.
+- **`prefers-reduced-motion`** desactiva todas las animaciones y deja el contenido visible desde el inicio.
+
 ### Accesibilidad
 
 - **Enlaces para navegar y botones para acciones.** La navegación entre secciones usa `<a href="/#seccion">` mediante `ScrollLink`, que funciona sin JavaScript y añade scroll suave y foco en la sección destino. Los `<button>` se reservan para abrir y cerrar el menú, cerrar el modal, enviar y reintentar.

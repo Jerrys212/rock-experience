@@ -26,7 +26,7 @@ export async function ExperiencesGrid({ searchParams }: { searchParams: SearchPa
     return (
         <ul className={gridClassName}>
             {experiences.map((experience) => (
-                <li key={experience.id}>
+                <li key={experience.id} className="reveal">
                     <ExperienceCard experience={experience} />
                 </li>
             ))}

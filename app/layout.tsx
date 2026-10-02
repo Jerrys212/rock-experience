@@ -8,7 +8,7 @@ import "./globals.css";
 const jost = Jost({
     variable: "--font-jost",
     subsets: ["latin"],
-    weight: ["400", "500", "600"],
+    weight: ["400", "500", "600", "700"],
 });
 
 const kaushanScript = Kaushan_Script({

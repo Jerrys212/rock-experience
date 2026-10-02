@@ -14,7 +14,7 @@
 | Command                  | Description                  |
 | ------------------------ | ---------------------------- |
 | `pnpm install`           | Install dependencies         |
-| `pnpm dev`               | Start dev server (port 3001) |
+| `pnpm dev`               | Start dev server (port 3000) |
 | `pnpm build`             | Production build             |
 | `pnpm start`             | Run production build         |
 | `pnpm lint`              | Run ESLint                   |

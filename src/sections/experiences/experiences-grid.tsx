@@ -1,9 +1,7 @@
 import { connection } from "next/server";
-
 import { experiencesSection, type Experience } from "@/content/experiences";
 import { env } from "@/lib/env";
 import { getExperiences } from "@/lib/experiences";
-
 import { ExperienceCard } from "./experience-card";
 import { ExperiencesError } from "./experiences-error";
 
@@ -13,10 +11,6 @@ export const gridClassName = "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols
 
 const SIMULATED_DELAY_MS = 4000;
 
-/**
- * Development-only: `?simular=carga` delays the response and `?simular=error` forces a
- * failure, so the loading and error states can be reviewed in the browser.
- */
 async function getSimulation(searchParams: ExperiencesSearchParams) {
     if (env.NODE_ENV !== "development") return undefined;
     const { simular } = await searchParams;
@@ -24,7 +18,6 @@ async function getSimulation(searchParams: ExperiencesSearchParams) {
 }
 
 export async function ExperiencesGrid({ searchParams }: { searchParams: ExperiencesSearchParams }) {
-    // Load at request time, not at build time.
     await connection();
     const simulation = await getSimulation(searchParams);
 

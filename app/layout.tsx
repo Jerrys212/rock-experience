@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Jost, Kaushan_Script } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import { site } from "@/lib/site";
-
 import "./globals.css";
 
 const jost = Jost({

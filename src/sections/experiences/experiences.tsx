@@ -1,8 +1,6 @@
 import { Suspense } from "react";
-
 import { experiencesSection } from "@/content/experiences";
 import { sectionIds } from "@/content/navigation";
-
 import { ExperiencesGrid, type ExperiencesSearchParams } from "./experiences-grid";
 import { ExperiencesSkeleton } from "./experiences-skeleton";
 
@@ -31,7 +29,6 @@ export function Experiences({ searchParams }: ExperiencesProps) {
                     <span aria-hidden="true" className="h-px flex-1 bg-white/15" />
                 </div>
 
-                {/* The heading is part of the static shell; the cards stream in at request time. */}
                 <Suspense fallback={<ExperiencesSkeleton />}>
                     <ExperiencesGrid searchParams={searchParams} />
                 </Suspense>

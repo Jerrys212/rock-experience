@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import type { Experience } from "@/content/experiences";
 
 type ExperienceCardProps = {
@@ -8,7 +7,7 @@ type ExperienceCardProps = {
 
 export function ExperienceCard({ experience }: ExperienceCardProps) {
     return (
-        <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-white/8 bg-[#111113] transition-colors duration-500 hover:border-white/15 motion-reduce:transition-none">
+        <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-white/8 bg-surface transition-colors duration-500 hover:border-white/15 motion-reduce:transition-none">
             <div className="relative aspect-3/2">
                 <div className="absolute inset-0 overflow-hidden">
                     <Image
@@ -23,7 +22,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
                         className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/60 to-transparent"
                     />
                 </div>
-                {/* Half over the photo, half over the card body. */}
+
                 <span className="bg-accent absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 px-4.5 py-2 text-sm font-medium whitespace-nowrap text-white">
                     {experience.category}
                 </span>

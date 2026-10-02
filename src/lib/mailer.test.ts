@@ -29,7 +29,9 @@ async function loadMailer() {
 describe("mailer", () => {
     beforeEach(() => {
         vi.mocked(getMailEnv).mockReturnValue(mailEnv);
-        vi.mocked(nodemailer.createTransport).mockReset().mockReturnValue({ sendMail: transportSendMail } as never);
+        vi.mocked(nodemailer.createTransport)
+            .mockReset()
+            .mockReturnValue({ sendMail: transportSendMail } as never);
         transportSendMail.mockReset().mockResolvedValue({ messageId: "abc", accepted: [message.to], rejected: [] });
     });
 

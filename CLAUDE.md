@@ -125,7 +125,7 @@ my-landing/
 
 ### Comments
 
-- **Avoid comments.** Code should explain itself through naming and structure. Don't add JSDoc, section dividers or comments that restate what the code does. Only comment a genuinely non-obvious *why* that can't be expressed in code, and keep it to one line.
+- **Avoid comments.** Code should explain itself through naming and structure. Don't add JSDoc, section dividers or comments that restate what the code does. Only comment a genuinely non-obvious _why_ that can't be expressed in code, and keep it to one line.
 
 ### Environment Variables
 
@@ -138,12 +138,12 @@ my-landing/
 - **Infer types from schemas**: `type ContactInput = z.infer<typeof ContactSchema>`.
 - **One schema, both layers**: the form uses `@hookform/resolvers/zod` and the Server Action re-validates with the same schema.
 - Server Actions use `safeParse` and return field errors, never throw raw to the client:
-  ```ts
-  const parsed = ContactSchema.safeParse(input);
-  if (!parsed.success) {
-    return { success: false, errors: parsed.error.flatten().fieldErrors };
-  }
-  ```
+    ```ts
+    const parsed = ContactSchema.safeParse(input);
+    if (!parsed.success) {
+        return { success: false, errors: parsed.error.flatten().fieldErrors };
+    }
+    ```
 - If an external service is called (email provider, CRM, CMS), validate its response with Zod before using it.
 
 ## Error Handling & UX

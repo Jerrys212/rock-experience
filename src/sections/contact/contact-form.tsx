@@ -2,7 +2,15 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle } from "lucide-react";
-import { useEffect, useId, useRef, useState, type BaseSyntheticEvent, type ChangeEvent, type ComponentProps } from "react";
+import {
+    useEffect,
+    useId,
+    useRef,
+    useState,
+    type BaseSyntheticEvent,
+    type ChangeEvent,
+    type ComponentProps,
+} from "react";
 import { useForm, type UseFormRegisterReturn } from "react-hook-form";
 import {
     ContactSchema,
@@ -42,8 +50,7 @@ type TextFieldProps = {
     error?: string;
     className?: string;
 } & (
-    | ({ multiline?: false } & Pick<ComponentProps<"input">, "type" | "autoComplete" | "inputMode">)
-    | { multiline: true }
+    ({ multiline?: false } & Pick<ComponentProps<"input">, "type" | "autoComplete" | "inputMode">) | { multiline: true }
 );
 
 function TextField({ name, registration, error, className, ...props }: TextFieldProps) {
@@ -167,8 +174,7 @@ export function ContactForm() {
     }, [submitted, setFocus]);
 
     const sanitizeOnChange =
-        (field: "name" | "phone", sanitize: (value: string) => string) =>
-        (event: ChangeEvent<HTMLInputElement>) => {
+        (field: "name" | "phone", sanitize: (value: string) => string) => (event: ChangeEvent<HTMLInputElement>) => {
             const sanitized = sanitize(event.target.value);
             if (sanitized === event.target.value) return;
             setValue(field, sanitized, { shouldValidate: isSubmitted });
@@ -211,11 +217,7 @@ export function ContactForm() {
     const privacyError = errors.privacy?.message;
 
     return (
-        <form
-            onSubmit={handleSubmit(onSubmit)}
-            noValidate
-            className="relative grid grid-cols-1 gap-5 md:grid-cols-2"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} noValidate className="relative grid grid-cols-1 gap-5 md:grid-cols-2">
             <TextField
                 name="name"
                 type="text"

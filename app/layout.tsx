@@ -38,7 +38,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children, modal }: LayoutProps<"/">) {
     return (
-        <html lang={site.locale} data-scroll-behavior="smooth" className={`${jost.variable} ${kaushanScript.variable} h-full antialiased`}>
+        <html
+            lang={site.locale}
+            data-scroll-behavior="smooth"
+            className={`${jost.variable} ${kaushanScript.variable} h-full antialiased`}
+        >
             <body className="flex min-h-full flex-col bg-black font-sans text-white">
                 <Navbar />
                 <main className="flex-1">{children}</main>

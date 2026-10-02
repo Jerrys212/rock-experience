@@ -20,7 +20,9 @@ const valid: ContactFormValues = {
 
 describe("sendContact", () => {
     beforeEach(() => {
-        vi.mocked(sendMail).mockReset().mockResolvedValue({ messageId: "1", accepted: ["x"], rejected: [] });
+        vi.mocked(sendMail)
+            .mockReset()
+            .mockResolvedValue({ messageId: "1", accepted: ["x"], rejected: [] });
         vi.spyOn(console, "error").mockImplementation(() => {});
     });
 

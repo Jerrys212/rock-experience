@@ -85,7 +85,9 @@ test.describe("experience page", () => {
         test(`shows a not found message for ${id}`, async ({ page }) => {
             await page.goto(`/experiencias/${id}`);
 
-            await expect(page.getByRole("heading", { level: 1, name: "No encontramos esta experiencia" })).toBeVisible();
+            await expect(
+                page.getByRole("heading", { level: 1, name: "No encontramos esta experiencia" }),
+            ).toBeVisible();
             await expect(page.getByRole("link", { name: "Volver a experiencias" })).toBeVisible();
         });
     }

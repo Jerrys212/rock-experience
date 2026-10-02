@@ -18,8 +18,7 @@ export const benefits = [
         id: "nuevas-audiencias",
         icon: Users,
         title: "Nuevas audiencias",
-        description:
-            "Conecta tu marca con comunidades de gaming, música y creadores que ya están buscando algo nuevo.",
+        description: "Conecta tu marca con comunidades de gaming, música y creadores que ya están buscando algo nuevo.",
     },
     {
         id: "tecnologia-que-sorprende",
@@ -32,8 +31,7 @@ export const benefits = [
         id: "resultados-medibles",
         icon: TrendingUp,
         title: "Resultados medibles",
-        description:
-            "Cada experiencia genera leads, datos y métricas claras para que sepas exactamente qué funcionó.",
+        description: "Cada experiencia genera leads, datos y métricas claras para que sepas exactamente qué funcionó.",
     },
     {
         id: "presencial-y-digital",

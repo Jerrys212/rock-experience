@@ -11,15 +11,15 @@ pnpm install
 pnpm dev        # http://localhost:3000
 ```
 
-| Comando                  | Descripción                          |
-| ------------------------ | ------------------------------------ |
+| Comando                  | Descripción                              |
+| ------------------------ | ---------------------------------------- |
 | `pnpm dev`               | Servidor de desarrollo en el puerto 3000 |
-| `pnpm build`             | Build de producción                  |
-| `pnpm start`             | Ejecuta el build de producción       |
-| `pnpm lint`              | ESLint                               |
-| `pnpm exec tsc --noEmit` | Verificación de tipos                |
-| `pnpm test`              | Tests unitarios (Vitest)             |
-| `pnpm test:e2e`          | Tests E2E (Playwright)               |
+| `pnpm build`             | Build de producción                      |
+| `pnpm start`             | Ejecuta el build de producción           |
+| `pnpm lint`              | ESLint                                   |
+| `pnpm exec tsc --noEmit` | Verificación de tipos                    |
+| `pnpm test`              | Tests unitarios (Vitest)                 |
+| `pnpm test:e2e`          | Tests E2E (Playwright)                   |
 
 ### Variables de entorno
 
@@ -48,18 +48,18 @@ En desarrollo, la sección de experiencias acepta un parámetro para ver sus est
 
 ## Tecnologías utilizadas
 
-| Tecnología | Uso |
-| --- | --- |
+| Tecnología                                     | Uso                                                                                                                |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | [Next.js 16](https://nextjs.org/) (App Router) | Framework: Server Components, Server Actions, rutas paralelas e interceptadas, `next/image`, `next/font`, metadata |
-| React 19 | UI |
-| TypeScript 5 (strict) | Tipado |
-| Tailwind CSS 4 | Estilos con tokens de diseño en `@theme` (`app/globals.css`) |
-| Zod 4 | Validación de datos, formulario, variables de entorno y respuestas externas |
-| React Hook Form + `@hookform/resolvers` | Estado y validación del formulario en el cliente |
-| Nodemailer | Envío de correos por SMTP (Brevo) |
-| lucide-react | Íconos |
-| Vitest | Tests unitarios |
-| Playwright + `smtp-server` | Tests E2E contra el build de producción, con un SMTP falso local |
+| React 19                                       | UI                                                                                                                 |
+| TypeScript 5 (strict)                          | Tipado                                                                                                             |
+| Tailwind CSS 4                                 | Estilos con tokens de diseño en `@theme` (`app/globals.css`)                                                       |
+| Zod 4                                          | Validación de datos, formulario, variables de entorno y respuestas externas                                        |
+| React Hook Form + `@hookform/resolvers`        | Estado y validación del formulario en el cliente                                                                   |
+| Nodemailer                                     | Envío de correos por SMTP (Brevo)                                                                                  |
+| lucide-react                                   | Íconos                                                                                                             |
+| Vitest                                         | Tests unitarios                                                                                                    |
+| Playwright + `smtp-server`                     | Tests E2E contra el build de producción, con un SMTP falso local                                                   |
 
 ## Estructura general
 
@@ -100,10 +100,10 @@ Reglas principales: una sección no importa de otra, los textos no se escriben d
 - El JSON vive en `src/content/experiences.json`. Se lee en el servidor y se valida con Zod antes de renderizar, de modo que un dato mal formado no rompe la UI en silencio.
 - La sección se renderiza en el servidor dentro de un `<Suspense>`. Con Partial Prerendering, el resto de la página es HTML estático y la grilla llega por streaming.
 - Estados:
-  - **Carga:** skeleton con la misma grilla.
-  - **Error:** mensaje con un botón "Reintentar" que hace `router.refresh()`.
-  - **Éxito:** las 6 cards.
-  - **Vacío:** un mensaje propio.
+    - **Carga:** skeleton con la misma grilla.
+    - **Error:** mensaje con un botón "Reintentar" que hace `router.refresh()`.
+    - **Éxito:** las 6 cards.
+    - **Vacío:** un mensaje propio.
 - También existe un endpoint `GET /api/experiences` (y `/api/experiences/[id]`) por si un cliente externo necesita los datos.
 - Las 6 experiencias usan un único componente reutilizable, `ExperienceCard`.
 - Las imágenes usan `picsum.photos/seed/...` en lugar de `?random=N`, para que cada experiencia muestre siempre la misma imagen entre recargas. Cada objeto del JSON agrega un campo `details` con la información del detalle.
@@ -117,15 +117,15 @@ Reglas principales: una sección no importa de otra, los textos no se escriben d
 
 - **Un solo `ContactSchema` de Zod** valida en el cliente (React Hook Form) y vuelve a validar en la Server Action, así las reglas no pueden divergir entre capas. Los tipos se infieren del schema.
 - Reglas:
-  - **Nombre:** sin números.
-  - **Teléfono:** exactamente 10 dígitos (formato mexicano), con espacios, guiones o paréntesis opcionales.
-  - **Correo:** se normaliza a minúsculas.
+    - **Nombre:** sin números.
+    - **Teléfono:** exactamente 10 dígitos (formato mexicano), con espacios, guiones o paréntesis opcionales.
+    - **Correo:** se normaliza a minúsculas.
 - Los campos de nombre y teléfono **filtran mientras se escribe o se pega**: no dejan escribir letras ni más de 10 dígitos en el teléfono, ni números en el nombre, en lugar de solo marcar el error al enviar.
 - Se valida al enviar. Después del primer intento se valida al cambiar cada campo, para que el error desaparezca en cuanto se corrige. Al enviar con errores, el foco va al primer campo inválido.
 - **Envío real con Server Action + SMTP (Brevo):**
-  - Se manda un aviso al dueño del sitio con `reply-to` al usuario, y una confirmación al usuario.
-  - Si falla el aviso al dueño, se muestra un error recuperable y se conservan los datos.
-  - Si solo falla la confirmación, el usuario ve éxito, porque su mensaje ya llegó; el fallo queda en el log.
+    - Se manda un aviso al dueño del sitio con `reply-to` al usuario, y una confirmación al usuario.
+    - Si falla el aviso al dueño, se muestra un error recuperable y se conservan los datos.
+    - Si solo falla la confirmación, el usuario ve éxito, porque su mensaje ya llegó; el fallo queda en el log.
 - Todo lo que escribe el usuario se escapa antes de insertarlo en el HTML de los correos, y la respuesta del servidor SMTP se valida con Zod.
 - **Honeypot** anti-spam: un campo oculto que, si llega con valor, se responde como éxito sin enviar nada.
 - Estados de carga (botón deshabilitado con "Enviando…", para evitar el doble envío), error (`role="alert"`) y confirmación (`role="status"`, que recibe el foco).
@@ -153,28 +153,28 @@ La interfaz se reorganiza por dispositivo en lugar de solo escalar. Se auditó e
 - **Server Components por defecto.** Los componentes cliente son hojas pequeñas: el formulario, el enlace con scroll, el observer de la sección activa, el modal y el botón de reintentar. Las secciones, la navbar y el layout no envían JavaScript propio.
 - **Plataforma nativa antes que JavaScript:** Popover API para el menú, `<dialog>` para el modal, `@starting-style` para las animaciones de entrada y CSS `:has()` para bloquear el scroll del body.
 - **Imágenes con `next/image`:**
-  - La del hero va en AVIF con `preload`.
-  - Las cards usan `lazy` y un `sizes` calculado según el ancho real de cada columna en cada breakpoint (por ejemplo, 384 px en 1440), para no descargar imágenes de más.
+    - La del hero va en AVIF con `preload`.
+    - Las cards usan `lazy` y un `sizes` calculado según el ancho real de cada columna en cada breakpoint (por ejemplo, 384 px en 1440), para no descargar imágenes de más.
 - **Fuentes con `next/font`:** se autoalojan, sin peticiones a Google Fonts ni saltos de layout.
 
 ### Animaciones
 
 El movimiento es sutil y cada animación cumple una función; no se anima por animar.
 
-| Dónde | Qué hace | Para qué |
-| --- | --- | --- |
+| Dónde                                            | Qué hace                                                               | Para qué                                                                   |
+| ------------------------------------------------ | ---------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | Títulos de sección, cards y columnas de contacto | Aparecen con un leve desplazamiento hacia arriba al entrar en pantalla | Marcar el inicio de cada bloque y guiar la lectura mientras se hace scroll |
-| Línea junto a cada título | Se dibuja de izquierda a derecha | Reforzar la jerarquía del encabezado |
-| Navbar | El subrayado crece desde el centro en hover y en la sección activa | Indicar dónde está el usuario y qué es clicable |
-| Menú móvil | Los ítems aparecen escalonados (40 ms entre cada uno) | Llevar la vista de arriba hacia abajo al abrirlo |
-| Modal de experiencia | Entra con opacidad y un desplazamiento de 12 px | Conectar el detalle con la card que lo abrió |
-| Formulario | Los errores aparecen suavemente; la confirmación entra con el ícono | Que los cambios de estado se noten sin ser bruscos |
-| CTAs y botón de enviar | Se comprimen levemente al presionarlos | Confirmar el toque, sobre todo en móvil |
+| Línea junto a cada título                        | Se dibuja de izquierda a derecha                                       | Reforzar la jerarquía del encabezado                                       |
+| Navbar                                           | El subrayado crece desde el centro en hover y en la sección activa     | Indicar dónde está el usuario y qué es clicable                            |
+| Menú móvil                                       | Los ítems aparecen escalonados (40 ms entre cada uno)                  | Llevar la vista de arriba hacia abajo al abrirlo                           |
+| Modal de experiencia                             | Entra con opacidad y un desplazamiento de 12 px                        | Conectar el detalle con la card que lo abrió                               |
+| Formulario                                       | Los errores aparecen suavemente; la confirmación entra con el ícono    | Que los cambios de estado se noten sin ser bruscos                         |
+| CTAs y botón de enviar                           | Se comprimen levemente al presionarlos                                 | Confirmar el toque, sobre todo en móvil                                    |
 
 Decisiones:
 
 - **Solo `transform` y `opacity`.** El navegador las anima en la GPU, sin recalcular el layout, así que no hay CLS ni bloqueo del hilo principal.
-- **Sin JavaScript ni librerías.** Las apariciones al hacer scroll usan *scroll-driven animations* (`animation-timeline: view()`). Las entradas usan `@starting-style`. En los navegadores sin soporte el contenido se muestra estático.
+- **Sin JavaScript ni librerías.** Las apariciones al hacer scroll usan _scroll-driven animations_ (`animation-timeline: view()`). Las entradas usan `@starting-style`. En los navegadores sin soporte el contenido se muestra estático.
 - **El hero no tiene animación de entrada.** Se midió con un A/B de Lighthouse alternando corridas contra `main`. Animar la imagen y el texto del hero bajaba la puntuación móvil unos 4 puntos y retrasaba el LCP unos 0.6 s, porque el hero es lo primero que se pinta. Sin esas animaciones, la rama mide igual que `main`.
 - **`prefers-reduced-motion`** desactiva todas las animaciones y deja el contenido visible desde el inicio.
 
@@ -185,8 +185,8 @@ Decisiones:
 - ARIA solo donde aporta: `aria-current` en la sección activa, `aria-controls` en la hamburguesa y `aria-invalid` solo cuando hay error.
 - `cursor: pointer` global para todo lo clicable y respeto a `prefers-reduced-motion`.
 - **Contraste WCAG AA verificado por cálculo:**
-  - Texto (mínimo 4.5:1): placeholder 5.3:1, descripciones 9.5:1, CTAs 6.4:1, errores 7.6:1.
-  - Componentes de UI y foco (mínimo 3:1): borde de los inputs 3.7:1, foco en violeta claro 7.2:1.
+    - Texto (mínimo 4.5:1): placeholder 5.3:1, descripciones 9.5:1, CTAs 6.4:1, errores 7.6:1.
+    - Componentes de UI y foco (mínimo 3:1): borde de los inputs 3.7:1, foco en violeta claro 7.2:1.
 
 ### Seguridad
 
@@ -246,12 +246,12 @@ Decisiones:
 - **Ruta en el contenido.** Puso la ruta del aviso de privacidad en el objeto de contenido. Como es una ruta fija de la app y no copy editable, pedí dejarla escrita directamente.
 - **Error detectado por el linter.** El compilador de React marcó la lectura de un `ref` durante el render del formulario (`pnpm lint`); se corrigió midiendo el formulario desde el evento de envío.
 - **Fallos que encontró la auditoría de responsive:**
-  - En 320 px la hamburguesa quedaba fuera de la pantalla.
-  - Varias áreas táctiles medían menos de 44 px.
-  - El `sizes` de las imágenes no correspondía al ancho real de la grilla.
+    - En 320 px la hamburguesa quedaba fuera de la pantalla.
+    - Varias áreas táctiles medían menos de 44 px.
+    - El `sizes` de las imágenes no correspondía al ancho real de la grilla.
 - **Fallos que encontró la revisión contra los requisitos:**
-  - Faltaba Open Graph y la meta description no correspondía a la campaña.
-  - El placeholder y el borde de los inputs no llegaban al contraste mínimo de WCAG.
-  - El borde de foco tampoco; eso no apareció en la primera revisión y salió al calcular los valores en lugar de estimarlos a ojo.
+    - Faltaba Open Graph y la meta description no correspondía a la campaña.
+    - El placeholder y el borde de los inputs no llegaban al contraste mínimo de WCAG.
+    - El borde de foco tampoco; eso no apareció en la primera revisión y salió al calcular los valores en lugar de estimarlos a ojo.
 
 **Conclusión:** la herramienta aceleró mucho la implementación, pero las decisiones de producto, las reglas de calidad y la validación final fueron mías. Lo que más funcionó fue darle especificaciones con criterios verificables y exigir pruebas medibles en lugar de aceptar "ya quedó".

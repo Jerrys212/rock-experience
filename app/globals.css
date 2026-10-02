@@ -14,6 +14,28 @@
     --font-display: var(--font-kaushan-script);
 }
 
+/*
+  Tailwind v4 resets buttons to `cursor: default`. Every clickable element must show
+  a pointer so users know they can act on it.
+*/
+@layer base {
+    button:not(:disabled),
+    [role="button"]:not([aria-disabled="true"]),
+    summary,
+    label[for],
+    select:not(:disabled),
+    input[type="checkbox"]:not(:disabled),
+    input[type="radio"]:not(:disabled),
+    input[type="submit"]:not(:disabled) {
+        cursor: pointer;
+    }
+
+    :disabled,
+    [aria-disabled="true"] {
+        cursor: not-allowed;
+    }
+}
+
 /* Lock page scroll while the mobile menu popover is open (it only exists below lg). */
 @media (width < 64rem) {
     body:has(#mobile-menu:popover-open) {

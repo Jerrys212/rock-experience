@@ -147,6 +147,7 @@ my-landing/
 
 - No component library: primitives are built in-house, so a11y is our responsibility.
 - Every interactive element is keyboard-navigable, has a visible focus state and an accessible label.
+- **Every clickable element shows `cursor: pointer`** (disabled ones `not-allowed`). Tailwind v4 removed it from buttons, so it's set globally in `app/globals.css` (`@layer base`); custom clickable elements outside those selectors need `cursor-pointer`. Non-interactive elements (e.g. cards that aren't links) must not use it.
 - Prefer native elements before custom ones: `<button>` for actions, `<a>` for navigation, `<details>`/`<summary>` for the FAQ accordion, `<dialog>` for modals.
 - Custom interactive widgets must expose the right ARIA state (`aria-expanded`, `aria-pressed`, `aria-controls`); e.g. the mobile menu toggle and the billing toggle.
 - `<main>` is rendered once, in `app/layout.tsx`. Sections must not render their own `<main>`.

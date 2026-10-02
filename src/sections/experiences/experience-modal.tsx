@@ -36,9 +36,9 @@ export function ExperienceModal({ closeLabel, children }: ExperienceModalProps) 
             onClick={(event) => {
                 if (event.target === event.currentTarget) close();
             }}
-            className="bg-surface m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-3xl overflow-y-auto rounded-lg border border-white/8 p-0 text-white opacity-100 transition-opacity duration-200 backdrop:bg-black/80 backdrop:backdrop-blur-sm motion-reduce:transition-none starting:open:opacity-0"
+            className="bg-surface m-auto w-[calc(100%-2rem)] max-w-3xl overflow-hidden rounded-lg border border-white/8 p-0 text-white opacity-100 transition-opacity duration-200 backdrop:bg-black/80 backdrop:backdrop-blur-sm motion-reduce:transition-none starting:open:opacity-0"
         >
-            <div className="relative">
+            <div className="max-h-[calc(100dvh-2rem)] overflow-y-auto overscroll-contain motion-safe:scroll-smooth">
                 <button
                     type="button"
                     onClick={close}

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { sectionIds } from "./navigation";
 
 export const ExperienceSchema = z.object({
     id: z.number().int().positive(),
@@ -50,6 +51,7 @@ export const experienceDetailCopy = {
         location: "Ubicación",
     },
     highlightsTitle: "Lo que vivirás",
+    cta: { label: "Participa ya", target: sectionIds.contacto },
     close: "Cerrar detalle",
     back: "Volver a experiencias",
     states: {

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ScrollButton } from "@/components/ui/scroll-button";
 import { experienceDetailCopy, type ExperienceDetail as ExperienceDetailData } from "@/content/experiences";
 
 export const EXPERIENCE_TITLE_ID = "experience-title";
@@ -71,6 +72,15 @@ export function ExperienceDetail({ experience, headingLevel: Heading }: Experien
                         </li>
                     ))}
                 </ul>
+
+                <div className="mt-10 flex justify-center">
+                    <ScrollButton
+                        target={experienceDetailCopy.cta.target}
+                        className="bg-accent hover:bg-accent-hover inline-flex h-12 w-full items-center justify-center rounded-full px-8 text-sm font-semibold tracking-[0.05em] text-white uppercase transition duration-200 hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto"
+                    >
+                        {experienceDetailCopy.cta.label}
+                    </ScrollButton>
+                </div>
             </div>
         </article>
     );

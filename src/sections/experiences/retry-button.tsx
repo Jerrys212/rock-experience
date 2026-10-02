@@ -8,7 +8,6 @@ type RetryButtonProps = {
     pendingLabel: string;
 };
 
-/** Re-runs the server render so the section tries to load its data again. */
 export function RetryButton({ label, pendingLabel }: RetryButtonProps) {
     const router = useRouter();
     const [isPending, startTransition] = useTransition();

@@ -1,10 +1,8 @@
 import { experiencesSection } from "@/content/experiences";
-
 import { gridClassName } from "./experiences-grid";
 
 const PLACEHOLDER_COUNT = 6;
 
-/** Mirrors the card layout so the grid doesn't jump when the real cards arrive. */
 export function ExperiencesSkeleton() {
     return (
         <div role="status">
@@ -12,7 +10,7 @@ export function ExperiencesSkeleton() {
             <ul aria-hidden="true" className={gridClassName}>
                 {Array.from({ length: PLACEHOLDER_COUNT }, (_, index) => (
                     <li key={index}>
-                        <div className="flex h-full flex-col overflow-hidden rounded-lg border border-white/8 bg-[#111113]">
+                        <div className="flex h-full flex-col overflow-hidden rounded-lg border border-white/8 bg-surface">
                             <div className="relative aspect-3/2 animate-pulse bg-white/5 motion-reduce:animate-none">
                                 <span className="absolute bottom-0 left-1/2 h-9 w-28 -translate-x-1/2 translate-y-1/2 bg-white/10" />
                             </div>

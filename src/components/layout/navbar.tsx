@@ -1,14 +1,12 @@
 import { ScrollButton } from "@/components/ui/scroll-button";
 import { navigation } from "@/content/navigation";
 import { cn } from "@/lib/utils";
-
 import { ActiveSectionObserver } from "./active-section-observer";
 
 const MOBILE_MENU_ID = "mobile-menu";
 const SECTION_IDS = navigation.items.map((item) => item.id);
 
 const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
-// Buttons inside the mobile menu also close it (native Popover API, no JS).
 const closesMenu = { popoverTarget: MOBILE_MENU_ID, popoverTargetAction: "hide" } as const;
 
 function BarRow({ inMenu = false }: { inMenu?: boolean }) {
@@ -102,7 +100,6 @@ export function Navbar() {
                 <BarRow />
             </div>
 
-            {/* Full-screen mobile menu: rendered in the top layer by the Popover API. */}
             <div
                 id={MOBILE_MENU_ID}
                 popover="auto"

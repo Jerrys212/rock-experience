@@ -113,10 +113,19 @@ my-landing/
 - When it's unavoidable (e.g. scrolling without changing the URL, IntersectionObserver, a form), keep it in a **tiny, reusable leaf** (e.g. `ScrollButton`, a renderless observer) that server components compose. Never mark a section, layout component or whole navbar as client.
 - **Mutations go through Server Actions**, never client-side fetch.
 
+### Styling & Colors
+
+- **No arbitrary color values** (`bg-[#111113]`, `text-[rgb(...)]`, inline `style` colors). Use only design tokens from `@theme` in `app/globals.css` (`accent`, `accent-hover`, `surface`…) or Tailwind's default palette (`black`, `white`, `zinc-*`…), with opacity modifiers when needed (`text-white/70`).
+- A color the design needs that doesn't exist yet becomes a **named token** in `@theme` first (e.g. `--color-surface`), then is used by name.
+
 ### Imports
 
 - Use the `@/*` path alias for `src/` imports.
-- Order: external packages → `@/` internal → relative.
+- Order: external packages → `@/` internal → relative, **with no blank lines between groups**.
+
+### Comments
+
+- **Avoid comments.** Code should explain itself through naming and structure. Don't add JSDoc, section dividers or comments that restate what the code does. Only comment a genuinely non-obvious *why* that can't be expressed in code, and keep it to one line.
 
 ### Environment Variables
 

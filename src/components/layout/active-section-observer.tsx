@@ -6,10 +6,6 @@ type ActiveSectionObserverProps = {
     sectionIds: readonly string[];
 };
 
-/**
- * Marks the nav items (`[data-nav-item]`) of the section crossing the middle of the
- * viewport with `aria-current`. Renders nothing so the navbar markup stays on the server.
- */
 export function ActiveSectionObserver({ sectionIds }: ActiveSectionObserverProps) {
     const key = sectionIds.join(",");
 

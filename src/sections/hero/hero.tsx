@@ -1,8 +1,6 @@
 import Image from "next/image";
-
 import { hero } from "@/content/hero";
 import { sectionIds } from "@/content/navigation";
-
 import { HeroActions } from "./hero-actions";
 
 const TITLE_ID = "hero-title";
@@ -27,7 +25,6 @@ export function Hero() {
                 aria-hidden="true"
                 className="absolute inset-0 bg-linear-to-t from-black/80 via-black/60 to-black/30"
             />
-            {/* Fades the photo into pure black so the next section continues without a seam. */}
             <div
                 aria-hidden="true"
                 className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-black to-transparent md:h-40"

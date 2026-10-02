@@ -19,6 +19,7 @@ pnpm dev        # http://localhost:3000
 | `pnpm lint`              | ESLint                               |
 | `pnpm exec tsc --noEmit` | Verificación de tipos                |
 | `pnpm test`              | Tests unitarios (Vitest)             |
+| `pnpm test:e2e`          | Tests E2E (Playwright)               |
 
 ### Variables de entorno
 
@@ -58,6 +59,7 @@ En desarrollo, la sección de experiencias acepta un parámetro para ver sus est
 | Nodemailer | Envío de correos por SMTP (Brevo) |
 | lucide-react | Íconos |
 | Vitest | Tests unitarios |
+| Playwright + `smtp-server` | Tests E2E contra el build de producción, con un SMTP falso local |
 
 ## Estructura general
 
@@ -191,9 +193,16 @@ Decisiones:
 - No hay credenciales en el código. Las variables sensibles (`SMTP_*`) viven en `.env.local`, se validan con Zod y solo se usan en el servidor; `src/lib/mailer.ts` importa `server-only`.
 - Lo que escribe el usuario se valida dos veces (cliente y servidor) y se escapa al insertarlo en los correos.
 
+## Tests
+
+- **Unitarios (Vitest, `pnpm test`):** Server Action de contacto (validación, honeypot, errores de entrega), mailer, variables de entorno, carga de experiencias, validación del id, simulación de estados, Route Handlers de `/api/experiences`, sitemap, robots y metadata de cada experiencia. Viven junto al código como `*.test.ts`.
+- **E2E (Playwright, `pnpm test:e2e`):** render de todas las secciones, navegación por anclas (escritorio, menú móvil, hero y footer), resaltado de la sección activa, modal de experiencias (abrir, cerrar con botón, Escape y backdrop, CTA, recarga), página de detalle y su metadata, formulario (errores, sanitizado, éxito con los dos correos y error de entrega), aviso de privacidad, SEO, API y ausencia de scroll horizontal en 375/768/1440. Corren en escritorio y en móvil (Pixel 7).
+- El formulario se prueba de punta a punta contra un **SMTP falso** que levanta `e2e/global-setup.ts`; `playwright.config.ts` sobrescribe las variables `SMTP_*` de `.env.local` y nunca reutiliza un servidor ya abierto, así que los tests no envían correos reales.
+- Los estados de carga y error (`?simular=`) solo existen en desarrollo, por eso el proyecto `simulation` corre contra `next dev` en el puerto 3101.
+- La primera vez hay que instalar el navegador: `pnpm exec playwright install chromium`.
+
 ## Qué mejoraría con más tiempo
 
-- **Tests E2E con Playwright:** que la página renderice, que la navegación por anclas funcione, que el formulario muestre éxito y errores, y que no haya scroll horizontal en 375/768/1440. Hoy solo hay tests unitarios del schema y de las plantillas de correo; el resto se verificó con scripts de Playwright fuera del repositorio.
 - **Protección del formulario contra abuso:** rate limiting por IP y un captcha invisible (por ejemplo, Cloudflare Turnstile). El honeypot solo frena bots simples, y la confirmación podría usarse para enviar correos a direcciones ajenas.
 - **Entregabilidad de los correos:** verificar un dominio propio en Brevo (SPF/DKIM/DMARC) en lugar de enviar desde una dirección `@gmail.com`.
 - **Contenido real:** aviso de privacidad redactado legalmente, con su enlace en el footer junto a los datos de contacto.

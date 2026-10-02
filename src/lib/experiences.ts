@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { cache } from "react";
 import {
     ExperienceDetailListSchema,
     ExperiencesSchema,
@@ -17,7 +18,7 @@ export async function getExperiences(): Promise<Experience[]> {
     return ExperiencesSchema.parse(await readExperiencesFile());
 }
 
-export async function getExperience(id: number): Promise<ExperienceDetail | undefined> {
+export const getExperience = cache(async (id: number): Promise<ExperienceDetail | undefined> => {
     const experiences = ExperienceDetailListSchema.parse(await readExperiencesFile());
     return experiences.find((experience) => experience.id === id);
-}
+});

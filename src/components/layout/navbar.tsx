@@ -1,15 +1,12 @@
 import { ScrollLink } from "@/components/ui/scroll-link";
 import { navigation } from "@/content/navigation";
-import { cn } from "@/lib/utils";
+import { cn, focusRing } from "@/lib/utils";
 import { ActiveSectionObserver } from "./active-section-observer";
 import { CloseMenuOnDesktop } from "./close-menu-on-desktop";
 
 const MOBILE_MENU_ID = "mobile-menu";
 const MENU_ITEM_STAGGER_MS = 40;
 const SECTION_IDS = navigation.items.map((item) => item.id);
-
-const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
-const closesMenu = { popoverTarget: MOBILE_MENU_ID, popoverTargetAction: "hide" } as const;
 
 function BarRow({ inMenu = false }: { inMenu?: boolean }) {
     return (
@@ -55,7 +52,7 @@ function BarRow({ inMenu = false }: { inMenu?: boolean }) {
                         "hover:bg-accent-hover transition duration-200 hover:-translate-y-px active:scale-[0.97] motion-reduce:transition-none motion-reduce:hover:translate-y-0",
                         focusRing,
                     )}
-                    >
+                >
                     {navigation.cta.label}
                 </ScrollLink>
 
@@ -63,8 +60,9 @@ function BarRow({ inMenu = false }: { inMenu?: boolean }) {
                     <button
                         type="button"
                         aria-label={navigation.menu.closeLabel}
+                        popoverTarget={MOBILE_MENU_ID}
+                        popoverTargetAction="hide"
                         className={cn("relative -mr-2 size-11 shrink-0 rounded-sm lg:hidden", focusRing)}
-                        {...closesMenu}
                     >
                         <span aria-hidden="true" className="absolute inset-x-2 top-1/2 h-0.5 rotate-45 bg-white" />
                         <span aria-hidden="true" className="absolute inset-x-2 top-1/2 h-0.5 -rotate-45 bg-white" />

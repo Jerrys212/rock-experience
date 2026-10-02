@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { ComponentProps, MouseEvent } from "react";
+import { prefersReducedMotion } from "@/lib/utils";
 
 type ScrollLinkProps = Omit<ComponentProps<typeof Link>, "href" | "onClick"> & {
     target: string;
@@ -11,8 +12,7 @@ type ScrollLinkProps = Omit<ComponentProps<typeof Link>, "href" | "onClick"> & {
 const SECTION_WAIT_TIMEOUT_MS = 3000;
 
 function scrollToSection(section: HTMLElement) {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    section.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+    section.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth" });
     section.focus({ preventScroll: true });
 }
 

@@ -173,7 +173,7 @@ La interfaz se reorganiza por dispositivo en lugar de solo escalar. Se auditó e
 - **Protección del formulario contra abuso:** rate limiting por IP y un captcha invisible (por ejemplo, Cloudflare Turnstile). El honeypot solo frena bots simples, y la confirmación podría usarse para enviar correos a direcciones ajenas.
 - **Entregabilidad de los correos:** verificar un dominio propio en Brevo (SPF/DKIM/DMARC) en lugar de enviar desde una dirección `@gmail.com`.
 - **Contraste:** subir el placeholder de los inputs (3.2:1, WCAG pide 4.5:1) y el borde de los campos (1.3:1, WCAG pide 3:1 para componentes de UI).
-- **Contenido real:** aviso de privacidad redactado legalmente y un `<footer>` con datos de contacto y enlaces legales.
+- **Contenido real:** aviso de privacidad redactado legalmente, con su enlace en el footer junto a los datos de contacto.
 - **Contenido editable:** mover los textos de `src/content/` a un CMS o a i18n; la separación entre copy y UI ya lo permite sin tocar componentes.
 - **Medición:** Lighthouse CI y monitoreo de Core Web Vitals reales, y analítica de conversiones del formulario.
 

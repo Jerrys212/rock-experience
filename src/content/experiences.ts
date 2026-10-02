@@ -24,7 +24,10 @@ export const ExperienceDetailSchema = ExperienceSchema.extend({
 
 export const ExperiencesSchema = z.array(ExperienceSchema);
 export const ExperienceDetailListSchema = z.array(ExperienceDetailSchema);
-export const ExperienceIdSchema = z.coerce.number().int().positive();
+export const ExperienceIdSchema = z
+    .string()
+    .regex(/^[1-9]\d*$/)
+    .transform(Number);
 
 export type Experience = z.infer<typeof ExperienceSchema>;
 export type ExperienceDetail = z.infer<typeof ExperienceDetailSchema>;

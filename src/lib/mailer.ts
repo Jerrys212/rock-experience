@@ -2,6 +2,7 @@ import "server-only";
 import nodemailer, { type Transporter } from "nodemailer";
 import { z } from "zod";
 import { getMailEnv } from "./env";
+import { site } from "./site";
 
 export type MailMessage = {
     to: string;
@@ -37,7 +38,7 @@ export function getMailSender() {
 
 export async function sendMail(message: MailMessage) {
     const info: unknown = await getTransporter().sendMail({
-        from: { name: "Rock Experience", address: getMailSender() },
+        from: { name: site.name, address: getMailSender() },
         ...message,
     });
     return SentMailSchema.parse(info);

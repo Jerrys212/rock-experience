@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 type ActiveSectionObserverProps = {
@@ -8,6 +9,7 @@ type ActiveSectionObserverProps = {
 
 export function ActiveSectionObserver({ sectionIds }: ActiveSectionObserverProps) {
     const key = sectionIds.join(",");
+    const pathname = usePathname();
 
     useEffect(() => {
         const sections = key
@@ -34,7 +36,7 @@ export function ActiveSectionObserver({ sectionIds }: ActiveSectionObserverProps
 
         sections.forEach((section) => observer.observe(section));
         return () => observer.disconnect();
-    }, [key]);
+    }, [key, pathname]);
 
     return null;
 }

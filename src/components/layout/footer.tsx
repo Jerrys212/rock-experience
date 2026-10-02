@@ -1,9 +1,7 @@
 import { ScrollLink } from "@/components/ui/scroll-link";
 import { footer } from "@/content/footer";
 import { navigation } from "@/content/navigation";
-import { cn } from "@/lib/utils";
-
-const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white";
+import { cn, focusRing } from "@/lib/utils";
 
 export function Footer() {
     return (

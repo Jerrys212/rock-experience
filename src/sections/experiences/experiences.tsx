@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { SectionHeading } from "@/components/layout/section-heading";
 import { experiencesSection } from "@/content/experiences";
 import { sectionIds } from "@/content/navigation";
 import { ExperiencesGrid } from "./experiences-grid";
@@ -20,15 +21,7 @@ export function Experiences({ searchParams }: ExperiencesProps) {
             className="scroll-mt-16 bg-black py-20 focus:outline-none md:scroll-mt-20 md:py-30"
         >
             <div className="mx-auto max-w-7xl px-4 md:px-8">
-                <div className="mb-12 flex items-center gap-6 md:mb-16">
-                    <h2
-                        id={TITLE_ID}
-                        className="reveal text-3xl font-bold tracking-wide text-white uppercase md:text-4xl"
-                    >
-                        {experiencesSection.title}
-                    </h2>
-                    <span aria-hidden="true" className="reveal-line h-px flex-1 bg-white/15" />
-                </div>
+                <SectionHeading id={TITLE_ID} title={experiencesSection.title} className="mb-12 md:mb-16" />
 
                 <Suspense fallback={<ExperiencesSkeleton />}>
                     <ExperiencesGrid searchParams={searchParams} />

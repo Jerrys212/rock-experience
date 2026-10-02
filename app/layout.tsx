@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Jost, Kaushan_Script } from "next/font/google";
+import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -41,6 +42,7 @@ export default function RootLayout({ children, modal }: LayoutProps<"/">) {
             <body className="flex min-h-full flex-col bg-black font-sans text-white">
                 <Navbar />
                 <main className="flex-1">{children}</main>
+                <Footer />
                 {modal}
             </body>
         </html>

@@ -29,8 +29,8 @@ const DEFAULT_VALUES: ContactFormValues = {
 };
 
 const controlBase =
-    "bg-surface w-full scroll-mt-28 rounded-sm border px-4 text-base text-white transition duration-150 placeholder:text-white/35 focus:ring-2 focus:outline-none motion-reduce:transition-none";
-const controlValid = "focus:border-accent focus:ring-accent/40 border-white/10";
+    "bg-surface w-full scroll-mt-28 rounded-sm border px-4 text-base text-white transition duration-150 placeholder:text-white/50 focus:ring-2 focus:outline-none motion-reduce:transition-none";
+const controlValid = "focus:border-accent-light focus:ring-accent/40 border-white/40";
 const controlInvalid = "border-danger focus:border-danger focus:ring-danger/40";
 
 type TextFieldName = keyof typeof contact.form.fields;

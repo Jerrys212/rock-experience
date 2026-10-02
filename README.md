@@ -161,6 +161,9 @@ La interfaz se reorganiza por dispositivo en lugar de solo escalar. Se auditó e
 - Navegación completa con teclado, foco visible en todos los elementos interactivos, `<label htmlFor>` en todos los campos y errores asociados con `aria-describedby`.
 - ARIA solo donde aporta: `aria-current` en la sección activa, `aria-controls` en la hamburguesa y `aria-invalid` solo cuando hay error.
 - `cursor: pointer` global para todo lo clicable y respeto a `prefers-reduced-motion`.
+- **Contraste WCAG AA verificado por cálculo:**
+  - Texto (mínimo 4.5:1): placeholder 5.3:1, descripciones 9.5:1, CTAs 6.4:1, errores 7.6:1.
+  - Componentes de UI y foco (mínimo 3:1): borde de los inputs 3.7:1, foco en violeta claro 7.2:1.
 
 ### Seguridad
 
@@ -172,7 +175,6 @@ La interfaz se reorganiza por dispositivo en lugar de solo escalar. Se auditó e
 - **Tests E2E con Playwright:** que la página renderice, que la navegación por anclas funcione, que el formulario muestre éxito y errores, y que no haya scroll horizontal en 375/768/1440. Hoy solo hay tests unitarios del schema y de las plantillas de correo; el resto se verificó con scripts de Playwright fuera del repositorio.
 - **Protección del formulario contra abuso:** rate limiting por IP y un captcha invisible (por ejemplo, Cloudflare Turnstile). El honeypot solo frena bots simples, y la confirmación podría usarse para enviar correos a direcciones ajenas.
 - **Entregabilidad de los correos:** verificar un dominio propio en Brevo (SPF/DKIM/DMARC) en lugar de enviar desde una dirección `@gmail.com`.
-- **Contraste:** subir el placeholder de los inputs (3.2:1, WCAG pide 4.5:1) y el borde de los campos (1.3:1, WCAG pide 3:1 para componentes de UI).
 - **Contenido real:** aviso de privacidad redactado legalmente, con su enlace en el footer junto a los datos de contacto.
 - **Contenido editable:** mover los textos de `src/content/` a un CMS o a i18n; la separación entre copy y UI ya lo permite sin tocar componentes.
 - **Medición:** Lighthouse CI y monitoreo de Core Web Vitals reales, y analítica de conversiones del formulario.

@@ -30,7 +30,7 @@ export function Hero() {
                 className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-black to-transparent md:h-40"
             />
 
-            <div className="relative mx-auto w-full max-w-225 px-4 pt-[45svh] pb-16 text-center">
+            <div className="relative mx-auto w-full max-w-225 px-4 pt-[45svh] md:px-8 pb-16 text-center">
                 <h1 id={TITLE_ID} className="font-display text-hero font-normal text-balance text-white">
                     {hero.title}
                 </h1>

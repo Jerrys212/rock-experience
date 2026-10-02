@@ -123,7 +123,7 @@ function SuccessPanel({ minHeight, onReset }: SuccessPanelProps) {
             <button
                 type="button"
                 onClick={onReset}
-                className="mt-6 rounded-sm text-sm text-white/70 underline underline-offset-4 transition-colors duration-150 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                className="mt-3 inline-flex min-h-11 items-center rounded-sm px-2 text-sm text-white/70 underline underline-offset-4 transition-colors duration-150 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             >
                 {contact.success.resetLabel}
             </button>
@@ -255,16 +255,16 @@ export function ContactForm() {
             </div>
 
             <div className="md:col-span-2">
-                <div className="flex items-start gap-3">
+                <div className="-my-3 flex min-h-11 items-center gap-3">
                     <input
                         id={privacyId}
                         type="checkbox"
                         aria-invalid={privacyError ? true : undefined}
                         aria-describedby={privacyError ? privacyErrorId : undefined}
-                        className="accent-accent focus-visible:outline-accent mt-px size-5 scroll-mt-28 shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2"
+                        className="accent-accent focus-visible:outline-accent size-5 scroll-mt-28 shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2"
                         {...register("privacy")}
                     />
-                    <label htmlFor={privacyId} className="text-sm leading-5 text-white/75">
+                    <label htmlFor={privacyId} className="py-3 text-sm leading-5 text-white/75">
                         {form.privacy.before}
                         <a
                             href="/aviso-de-privacidad"
@@ -294,7 +294,7 @@ export function ContactForm() {
                 <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-accent hover:enabled:bg-accent-hover inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-[0.05em] text-white uppercase transition duration-200 hover:enabled:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white disabled:opacity-70 motion-reduce:transition-none motion-reduce:hover:enabled:translate-y-0 md:w-auto"
+                    className="bg-accent hover:enabled:bg-accent-hover inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-[0.05em] text-white uppercase transition duration-200 hover:enabled:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white disabled:opacity-70 motion-reduce:transition-none motion-reduce:hover:enabled:translate-y-0 sm:w-auto"
                 >
                     {isSubmitting && <Spinner />}
                     {isSubmitting ? form.submit.loadingLabel : form.submit.label}

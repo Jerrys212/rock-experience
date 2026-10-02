@@ -15,7 +15,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
                         src={experience.image}
                         alt={experience.title}
                         fill
-                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        sizes="(min-width: 1280px) 384px, (min-width: 1024px) calc((100vw - 128px) / 3), (min-width: 768px) calc((100vw - 88px) / 2), (min-width: 640px) calc((100vw - 56px) / 2), calc(100vw - 32px)"
                         className="object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                     />
                     <div

@@ -43,7 +43,7 @@ export function ExperienceModal({ closeLabel, children }: ExperienceModalProps) 
                     type="button"
                     onClick={close}
                     aria-label={closeLabel}
-                    className="absolute top-3 right-3 z-10 size-10 rounded-full bg-black/60 backdrop-blur-sm transition-colors hover:bg-black/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                    className="absolute top-3 right-3 z-10 size-11 rounded-full bg-black/60 backdrop-blur-sm transition-colors hover:bg-black/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                     <span aria-hidden="true" className="absolute inset-x-2.5 top-1/2 h-0.5 rotate-45 bg-white" />
                     <span aria-hidden="true" className="absolute inset-x-2.5 top-1/2 h-0.5 -rotate-45 bg-white" />

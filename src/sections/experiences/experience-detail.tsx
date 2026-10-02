@@ -26,7 +26,7 @@ export function ExperienceDetail({ experience, headingLevel: Heading }: Experien
                         src={experience.image}
                         alt={experience.title}
                         fill
-                        sizes="(min-width: 768px) 768px, 100vw"
+                        sizes="(min-width: 800px) 768px, calc(100vw - 32px)"
                         className="object-cover"
                     />
                     <div

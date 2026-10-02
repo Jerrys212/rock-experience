@@ -181,33 +181,47 @@ La interfaz se reorganiza por dispositivo en lugar de solo escalar. Se auditó e
 
 ## Herramientas de IA utilizadas
 
-**Herramienta:** Claude Code (Anthropic), usado desde la terminal dentro del repositorio.
+**Herramienta:** Claude Code (Anthropic), usado desde la terminal dentro del repositorio durante todo el desarrollo.
 
-**Para qué la utilicé:**
+### Cómo la utilicé
 
-- Implementar secciones a partir de especificaciones detalladas que yo redactaba (estructura, estilos, validaciones y criterios de terminado), siguiendo las reglas de arquitectura de `CLAUDE.md`.
+- **Especificaciones antes que prompts sueltos.** Para cada sección redacté una especificación con estructura, estilos, comportamiento por breakpoint, validaciones y criterios de terminado. Le pedía primero un plan de archivos y solo después el código.
+- **`CLAUDE.md` como guardarraíl.** Las reglas del proyecto viven en `CLAUDE.md`: arquitectura por secciones, Server Components por defecto, tokens de color, sin comentarios, Zod en todas las entradas y accesibilidad. La herramienta lo lee en cada sesión. Cada vez que corregía algo, convertía la corrección en una regla para que no se repitiera.
+- **Una rama y un PR por feature** (navbar y hero, experiencias, detalle, beneficios, contacto, responsive, requisitos, footer y contraste), con commits que explican el porqué.
+- **Verificación en el navegador real.** Pedí que cada cambio visual se comprobara con capturas automatizadas (Playwright) en 375, 768 y 1440 px, y con mediciones concretas: scroll horizontal, áreas táctiles, caracteres por línea, contraste calculado y Lighthouse sobre el build de producción.
+
+### Para qué la utilicé
+
+- Implementar las secciones a partir de mis especificaciones: navbar, hero, experiencias con detalle en modal, beneficios, contacto y footer.
 - Integrar el envío real de correos con Brevo a partir de las variables de entorno que yo configuré.
-- Auditar el responsive con capturas automatizadas en 7 tamaños de pantalla y mediciones (desbordes, áreas táctiles, caracteres por línea).
-- Revisar el proyecto contra los requisitos de la prueba y redactar documentación.
+- Auditar el responsive en 7 tamaños de pantalla y revisar el proyecto contra los requisitos de la prueba.
+- Redactar los mensajes de commit y la documentación.
 
-**Qué revisé manualmente:**
+### Qué revisé manualmente
 
 - El plan de archivos de cada sección antes de que se escribiera código.
-- Las reglas de validación del formulario, contrastándolas con el caso de uso real (números de teléfono mexicanos y nombres de personas).
-- La recepción de los dos correos en una prueba real de envío.
-- La organización de ramas y los mensajes de commit antes de cada PR.
+- Cada PR antes de fusionarlo a `main`, incluido el orden de fusión de las ramas que dependían de otras.
+- Las reglas de validación del formulario, contrastándolas con el caso de uso real: números de teléfono mexicanos y nombres de personas.
+- La recepción de los dos correos (aviso y confirmación) en una prueba real de envío.
+- Que `instructions.md` y las credenciales (`.env.local`) nunca se subieran al repositorio.
 
-**Qué generó mal y cómo lo detecté y corregí:**
+### Qué generó mal y cómo lo detecté y corregí
 
-- **Rama equivocada:** empezó la sección de contacto sobre `feature/benefits`, que ya estaba fusionada. Lo noté al revisar el flujo de git; se movieron los cambios a `feature/contact`, creada desde `main` actualizado.
-- **Teléfono demasiado permisivo:** la primera versión aceptaba de 10 a 15 dígitos y dejaba escribir letras, aunque las rechazaba al enviar. Para números mexicanos lo correcto son exactamente 10 dígitos, así que pedí que la validación fuera exacta y que el campo filtrara letras (y números en el nombre) mientras se escribe.
-- **Ruta en el contenido:** puso la ruta del aviso de privacidad en el objeto de contenido. Como es una ruta fija de la app y no copy editable, pedí dejarla escrita directamente.
-- **Error detectado por el linter:** el compilador de React marcó la lectura de un `ref` durante el render en el formulario (`pnpm lint`); se corrigió midiendo el formulario desde el evento de envío.
-- **Fallos detectados en la auditoría de responsive:**
+- **Demasiado JavaScript en el cliente.** La primera navbar y los CTAs del hero eran componentes cliente completos. Los pasé a Server Components, con el menú móvil hecho con la Popover API nativa y solo una hoja cliente pequeña para el scroll. Agregué a `CLAUDE.md` que `"use client"` es el último recurso.
+- **Nada parecía clicable.** Tailwind v4 quita `cursor: pointer` de los botones y no lo tuvo en cuenta. Lo noté al usar la página; se resolvió con una regla global en `globals.css` y otra en `CLAUDE.md`.
+- **Colores inventados y comentarios de más.** Usó un color arbitrario (`bg-[#111113]`) y comentarios que repetían el código. Pedí convertir el color en un token de diseño (`--color-surface`) y quitar los comentarios, y dejé ambas reglas escritas.
+- **Navegación con botones.** Para no cambiar la URL, la navegación entre secciones usaba `<button>`. Al contrastar con los requisitos (enlaces para navegar, botones para acciones) se cambió a enlaces reales que funcionan sin JavaScript.
+- **Rama equivocada.** Empezó la sección de contacto sobre `feature/benefits`, que ya estaba fusionada. Lo noté al revisar el flujo de git; los cambios se movieron a una rama nueva creada desde `main` actualizado.
+- **Teléfono demasiado permisivo.** La primera versión aceptaba de 10 a 15 dígitos y dejaba escribir letras, aunque las rechazaba al enviar. Pedí exactamente 10 dígitos (formato mexicano) y que el campo filtrara letras mientras se escribe, y lo mismo con los números en el nombre.
+- **Ruta en el contenido.** Puso la ruta del aviso de privacidad en el objeto de contenido. Como es una ruta fija de la app y no copy editable, pedí dejarla escrita directamente.
+- **Error detectado por el linter.** El compilador de React marcó la lectura de un `ref` durante el render del formulario (`pnpm lint`); se corrigió midiendo el formulario desde el evento de envío.
+- **Fallos que encontró la auditoría de responsive:**
   - En 320 px la hamburguesa quedaba fuera de la pantalla.
   - Varias áreas táctiles medían menos de 44 px.
   - El `sizes` de las imágenes no correspondía al ancho real de la grilla.
-- **Fallos detectados al contrastar con los requisitos:**
-  - La navegación usaba `<button>` en lugar de enlaces.
-  - Faltaba Open Graph.
-  - La meta description no correspondía a la campaña.
+- **Fallos que encontró la revisión contra los requisitos:**
+  - Faltaba Open Graph y la meta description no correspondía a la campaña.
+  - El placeholder y el borde de los inputs no llegaban al contraste mínimo de WCAG.
+  - El borde de foco tampoco; eso no apareció en la primera revisión y salió al calcular los valores en lugar de estimarlos a ojo.
+
+**Conclusión:** la herramienta aceleró mucho la implementación, pero las decisiones de producto, las reglas de calidad y la validación final fueron mías. Lo que más funcionó fue darle especificaciones con criterios verificables y exigir pruebas medibles en lugar de aceptar "ya quedó".

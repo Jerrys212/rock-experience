@@ -1,4 +1,4 @@
-import { ScrollButton } from "@/components/ui/scroll-button";
+import { ScrollLink } from "@/components/ui/scroll-link";
 import { hero } from "@/content/hero";
 import { cn } from "@/lib/utils";
 
@@ -10,15 +10,15 @@ export function HeroActions() {
 
     return (
         <div className="mx-auto mt-10 flex max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center sm:gap-4">
-            <ScrollButton target={primary.target} className={cn(base, "bg-accent hover:bg-accent-hover text-white")}>
+            <ScrollLink target={primary.target} className={cn(base, "bg-accent hover:bg-accent-hover text-white")}>
                 {primary.label}
-            </ScrollButton>
-            <ScrollButton
+            </ScrollLink>
+            <ScrollLink
                 target={secondary.target}
                 className={cn(base, "border border-white/60 text-white hover:border-white hover:bg-white/10")}
             >
                 {secondary.label}
-            </ScrollButton>
+            </ScrollLink>
         </div>
     );
 }
